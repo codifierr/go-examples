@@ -4,6 +4,7 @@ package main
 import (
 	"fmt"
 	"sort"
+	"time"
 )
 
 func main() {
@@ -36,9 +37,29 @@ func main() {
 	/*arr := []int{1, 2, 3, 4, 5}
 	miniMaxSum(arr)*/
 
-	ar := []int32{3, 2, 1, 7, 6, 8, 8, 3}
-	println(birthdayCakeCandles(ar))
+	//ar := []int32{3, 2, 1, 7, 6, 8, 8, 3}
+	//println(birthdayCakeCandles(ar))
 
+	time := "07:05:45PM"
+	println(timeConversion(time))
+
+}
+
+/*
+ * Complete the timeConversion function below.
+ */
+func timeConversion(s string) string {
+	/*
+	 * Write your code here.
+	 */
+	layoutFrom := "03:04:05PM"
+	layoutTo := "15:04:05"
+	time, err := time.Parse(layoutFrom, s)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	return time.Format(layoutTo)
 }
 
 // Complete the birthdayCakeCandles function below.
