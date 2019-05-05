@@ -40,8 +40,112 @@ func main() {
 	//ar := []int32{3, 2, 1, 7, 6, 8, 8, 3}
 	//println(birthdayCakeCandles(ar))
 
-	time := "07:05:45PM"
-	println(timeConversion(time))
+	// time := "07:05:45PM"
+	// println(timeConversion(time))
+
+	// a := []int32{1, 2, 3, 4, 1}
+	// b := []int32{3, 4, 1, 2, 1, 3}
+	// c := longestCommonSubsequence(a, b)
+	// fmt.Printf("LongestCommonSubsequence : %v\n", c)
+
+	// h := []int32{1, 3, 1, 3, 1, 4, 1, 3, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7}
+	// word := "zaba"
+	// fmt.Printf("DesignerPdfViewer : %v\n", designerPdfViewer(h, word))
+
+	// a := []int32{3, 4, 5}
+	// k := int32(2)
+	// queries := []int32{1, 2}
+
+	// fmt.Printf("CircularArrayRotation : %v\n", circularArrayRotation(a, k, queries))
+
+	grades := []int32{73, 67, 38, 33}
+	fmt.Printf("GradingStudents : %v\n", gradingStudents(grades))
+
+}
+
+/*
+ * Complete the gradingStudents function below.
+ */
+func gradingStudents(grades []int32) []int32 {
+	var result []int32
+	for _, v := range grades {
+		fmt.Printf("Value at once : %v\n", v%10)
+		if v > 38 {
+			if diff := v % 10; diff < 3 {
+				result = append(result, v+5-diff)
+			} else {
+				result = append(result, v)
+			}
+		} else {
+			//fmt.Printf("Value : %v\n", v)
+			result = append(result, v)
+		}
+	}
+	return result
+}
+
+// Complete the angryProfessor function below.
+func angryProfessor(k int32, a []int32) string {
+
+	return "nil"
+}
+
+// Complete the circularArrayRotation function below.
+func circularArrayRotation(a []int32, k int32, queries []int32) []int32 {
+	if k < 0 || len(a) == 0 {
+		return a
+	}
+	r := int32(len(a)) - k%int32(len(a))
+	a = append(a[r:], a[:r]...)
+	result := make([]int32, len(queries))
+	for i, v := range queries {
+		result[i] = a[v]
+	}
+	return result
+}
+
+// Complete the designerPdfViewer function below.
+func designerPdfViewer(h []int32, word string) int32 {
+	var maxH int32
+	for _, val := range word {
+		if h[val-'a'] > maxH {
+			maxH = h[val-'a']
+		}
+	}
+	return int32(len(word)) * maxH
+}
+
+// Complete the longestCommonSubsequence function below.
+func longestCommonSubsequence(a, b []int32) []int32 {
+	var c []int32
+	l, c := longestCommonSubsequenceHelper(a, b, int32(len(a)), int32(len(b)), c)
+	fmt.Println(l)
+	return c
+}
+
+func longestCommonSubsequenceHelper(a, b []int32, m, n int32, c []int32) (int32, []int32) {
+	if m == 0 || n == 0 {
+		//close(ch)
+		return 0, c
+	}
+	for _, val := range c {
+		if val == a[m-1] {
+			return 1, c
+		}
+	}
+	if a[m-1] == b[n-1] {
+		c = append(c, a[m-1])
+		k, c := longestCommonSubsequenceHelper(a, b, m-1, n-1, c)
+		return int32(1) + k, c
+	}
+	i, c := longestCommonSubsequenceHelper(a, b, m-1, n, c)
+	j, c := longestCommonSubsequenceHelper(a, b, m, n-1, c)
+	if i > j {
+		//c = append(c, a[m-1])
+		return i, c
+	}
+	//c = append(c, a[n-1])
+	return j, c
 
 }
 

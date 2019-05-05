@@ -12,6 +12,6 @@ func sqrt(x float64) string {
 	return fmt.Sprint(math.Sqrt(x))
 }
 
-func main(){
-	fmt.Println(sqrt(4),sqrt(-4))
+func main() {
+	fmt.Println(sqrt(4), sqrt(-4))
 }
