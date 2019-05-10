@@ -37,6 +37,8 @@ func main() {
 
 	for t := range ticker.C {
 		body := fmt.Sprintf("Hello RabbitMq: %v\n", t)
+
+		//body := fmt.Sprintf("%v", json)
 		err = ch.Publish(
 			"",     // exchange
 			q.Name, // routing key

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 
 	"github.com/streadway/amqp"
@@ -11,6 +12,29 @@ func failOnError(err error, msg string) {
 		log.Fatalf("%s: %s", msg, err)
 	}
 }
+
+type subscriptionEvent struct {
+	Subscriptions []*subscription `json:"subscriptions"`
+}
+
+type subscription struct {
+	Topic  string `json:"topic"`
+	Status bool   `json:"status"`
+}
+
+// func (subscription subscription) String() string {
+// 	return fmt.Sprintf("Topic: %v | Status: %v", subscription.Topic, subscription.Status)
+// }
+
+// func (subscriptionEvent *subscriptionEvent) String() []string {
+// 	var result = make([]string, len(subscriptionEvent.Subscriptions))
+// 	i := 0
+// 	for _, subscription := range subscriptionEvent.Subscriptions {
+// 		result[i] = fmt.Sprintf("Topic: %v | Status: %v", subscription.Topic, subscription.Status)
+// 		i++
+// 	}
+// 	return result
+// }
 
 func main() {
 	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
@@ -46,7 +70,14 @@ func main() {
 
 	go func() {
 		for d := range msgs {
-			log.Printf("Received a message: %s", d.Body)
+			var event subscriptionEvent
+			if err := json.Unmarshal(d.Body, &event); err != nil {
+				panic(err)
+			} else {
+				val, _ := json.Marshal(event)
+				log.Printf("Received a message: %s", string(val))
+			}
+
 		}
 	}()
 
