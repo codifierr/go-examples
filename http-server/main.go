@@ -31,7 +31,7 @@ func mathHandler(rw http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	log.Printf("Request : %v", r)
 	dec := json.NewDecoder(r.Body)
-	req := MathRequest{}
+	req := &MathRequest{}
 
 	if err := dec.Decode(req); err != nil {
 		http.Error(rw, err.Error(), http.StatusBadRequest)
@@ -72,7 +72,13 @@ func mathHandler(rw http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/hello", helloHandler)
 	http.HandleFunc("/math", mathHandler)
-	if err := http.ListenAndServe(":8090", nil); err != nil {
+	go func() {
+		if err := http.ListenAndServe(":8190", nil); err != nil {
+			log.Fatal(err)
+		}
+	}()
+	if err := http.ListenAndServe(":8290", nil); err != nil {
 		log.Fatal(err)
 	}
+
 }
