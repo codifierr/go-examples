@@ -5,6 +5,6 @@ import (
 	"math"
 )
 
-func main(){
-	fmt.Println("Problems %g problems.\n", math.Sqrt(10))
+func main() {
+	fmt.Printf("Problems %g problems", math.Sqrt(10))
 }
