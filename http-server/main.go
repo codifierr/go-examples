@@ -5,9 +5,17 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	_ "net/http/pprof"
 )
 
 func helloHandler(rw http.ResponseWriter, r *http.Request) {
+
+	for name, values := range r.Header {
+		// Loop over all values for the name.
+		for _, value := range values {
+			fmt.Println(name, value)
+		}
+	}
 
 	fmt.Fprint(rw, "Hello gofers.")
 
@@ -72,12 +80,12 @@ func mathHandler(rw http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/hello", helloHandler)
 	http.HandleFunc("/math", mathHandler)
-	go func() {
-		if err := http.ListenAndServe(":8190", nil); err != nil {
-			log.Fatal(err)
-		}
-	}()
-	if err := http.ListenAndServe(":8290", nil); err != nil {
+	// go func() {
+	// 	if err := http.ListenAndServe(":8190", nil); err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// }()
+	if err := http.ListenAndServe(":8390", nil); err != nil {
 		log.Fatal(err)
 	}
 
