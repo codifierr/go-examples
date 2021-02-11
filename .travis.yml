@@ -1,0 +1,6 @@
+dist: xenial
+language: go
+
+go:
+  - 1.15.x
+  - tip
