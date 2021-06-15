@@ -36,16 +36,16 @@ func main() {
 	fmt.Printf("Decoded string - %+v\n", req)
 
 	//create response
-	prevbalance:= 45000.00
-	resp:= map[string]interface{}{
-		"ok": true,
+	prevbalance := 45000.00
+	resp := map[string]interface{}{
+		"ok":      true,
 		"balance": prevbalance + req.Amount,
 	}
 
 	//encode response
-	enc:= json.NewEncoder(os.Stdout)
-	if err:=enc.Encode(resp);err!=nil{
-		log.Fatalf("Error can't encode - %s\n",err)
+	enc := json.NewEncoder(os.Stdout)
+	if err := enc.Encode(resp); err != nil {
+		log.Fatalf("Error can't encode - %s\n", err)
 	}
 
 	//fmt.Printf("Encoded response - %+v\n",resp)

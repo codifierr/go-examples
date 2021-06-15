@@ -5,10 +5,10 @@ import (
 	"runtime"
 )
 
-func main(){
+func main() {
 	fmt.Print("Go runs on ")
-	switch os:=runtime.GOOS; os{
-	case "darwin" :
+	switch os := runtime.GOOS; os {
+	case "darwin":
 		fmt.Println("Os X")
 	case "linux":
 		fmt.Println("Linux.")

@@ -4,10 +4,10 @@ import (
 	"fmt"
 )
 
-func main(){
+func main() {
 	sum := 1
-	for sum<100{
-		sum+=sum
+	for sum < 100 {
+		sum += sum
 	}
 	fmt.Println(sum)
 }

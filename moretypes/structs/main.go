@@ -9,9 +9,9 @@ type Vertex struct {
 	Y int
 }
 
-func main(){
-	fmt.Println(Vertex{1,2})
-	v := Vertex{1,2}
+func main() {
+	fmt.Println(Vertex{1, 2})
+	v := Vertex{1, 2}
 
 	//Struct fields are accessed using a dot.
 	v.X = 4

@@ -5,18 +5,18 @@ import (
 	"math"
 )
 
-func pow(x,n,lim float64) float64{
-	
-	if v:= math.Pow(x,n); v< lim {
+func pow(x, n, lim float64) float64 {
+
+	if v := math.Pow(x, n); v < lim {
 		return v
 	}
-	 return lim
+	return lim
 
 }
 
-func main(){
+func main() {
 	fmt.Println(
-		pow(3,2,20),
-		pow(3,3,20),
+		pow(3, 2, 20),
+		pow(3, 3, 20),
 	)
 }

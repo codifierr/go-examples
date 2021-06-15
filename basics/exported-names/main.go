@@ -1,10 +1,10 @@
 package main
 
-import(
+import (
 	"fmt"
 	"math"
 )
 
-func main(){
+func main() {
 	fmt.Println(math.Pi)
 }

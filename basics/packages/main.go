@@ -5,6 +5,6 @@ import (
 	"math/rand"
 )
 
-func main(){
-	fmt.Println("Random number : ",rand.Int31n(10))
+func main() {
+	fmt.Println("Random number : ", rand.Int31n(10))
 }
