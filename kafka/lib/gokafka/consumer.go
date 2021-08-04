@@ -34,7 +34,7 @@ func NewConsumer(options ...Option) (*Consumer, error) {
 		ctx:               ops.ctx,
 	}
 	go c.start()
-	go c.implicitClose()
+	go c.implicitStop()
 	return c, nil
 }
 func (c Consumer) start() {
@@ -70,8 +70,12 @@ func (c Consumer) start() {
 	}
 }
 
-func (c Consumer) implicitClose() {
+func (c Consumer) implicitStop() {
 	<-c.ctx.Done()
+	c.Stop()
+}
+
+func (c Consumer) Stop() {
 	c.reader.Close()
 	close(c.MessageChan)
 	close(c.ErrChan)
