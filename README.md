@@ -1,2 +1,2 @@
-# go-examples
+# Golang Examples
 GO practice workspace
