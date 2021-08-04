@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/wheelcomplex/lsof"
+	"github.com/diamondburned/lsof"
 )
 
 func main() {
