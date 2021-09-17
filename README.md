@@ -1,2 +1,2 @@
 # Golang Examples
-GO practice workspace
+GoLang practice workspace
