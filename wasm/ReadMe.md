@@ -15,4 +15,4 @@ goexec 'http.ListenAndServe(`:8080`, http.FileServer(http.Dir(`.`)))'
 ### Below the url's
 HTTP client : http://localhost:8080/httpclient/
 
-Pretty Print Json : http://localhost:8080/prettyjson/ for pretty printing json
+Pretty Print Json : http://localhost:8080/prettyjson/
