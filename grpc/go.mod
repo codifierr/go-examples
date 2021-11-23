@@ -3,9 +3,10 @@ module github.com/codifierr/go-examples/grpc/v0.0.1
 go 1.17
 
 require (
+	github.com/google/uuid v1.1.2
 	github.com/rs/zerolog v1.26.0
 	google.golang.org/grpc v1.42.0
-	google.golang.org/protobuf v1.27.1
+	proto v0.0.0-00010101000000-000000000000
 )
 
 require (
@@ -14,4 +15,7 @@ require (
 	golang.org/x/sys v0.0.0-20210809222454-d867a43fc93e // indirect
 	golang.org/x/text v0.3.6 // indirect
 	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013 // indirect
+	google.golang.org/protobuf v1.27.1 // indirect
 )
+
+replace proto => ./proto

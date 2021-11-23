@@ -6,6 +6,7 @@ import (
 
 	pb "proto"
 
+	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
 )
@@ -13,7 +14,7 @@ import (
 func main() {
 	log.Info().Msg("Starting message processor grpc client")
 
-	con, err := grpc.Dial("127.0.0.1:8081", grpc.WithInsecure())
+	con, err := grpc.Dial("127.0.0.1:8083", grpc.WithInsecure())
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to connect to stats processor")
 	}
@@ -29,7 +30,8 @@ func main() {
 func SendMessage(client pb.MessageProcessorClient) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	resp, err := client.ProcessMessages(ctx, &pb.MessagePayload{Id: "testID", Message: "This is test message"})
+	Id := uuid.New().String()
+	resp, err := client.ProcessMessages(ctx, &pb.MessagePayload{Id: Id, Message: "This is test message"})
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to send request stats")
 	}

@@ -10,6 +10,7 @@ import (
 
 	pb "proto"
 
+	"github.com/google/uuid"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
@@ -18,6 +19,12 @@ import (
 // grpc server
 type server struct {
 	pb.UnimplementedMessageProcessorServer
+}
+
+func (s *server) ProcessMessages(ctx context.Context, msg *pb.MessagePayload) (*pb.Ack, error) {
+	log.Info().Msgf("Received message: %v", msg)
+	traceId := uuid.New().String()
+	return &pb.Ack{Id: msg.GetId(), TraceId: traceId, Message: "Message processed successfully"}, nil
 }
 
 func main() {
@@ -38,7 +45,7 @@ func main() {
 
 	// start grpc server
 	log.Info().Msg("Starting grpc server!")
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 8081))
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 8083))
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to listen")
 	}
