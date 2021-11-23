@@ -1,2 +1,3 @@
 # Golang Examples
-GoLang practice workspace
+  
+ This repo contains some of the use case examples written in golang programming language
