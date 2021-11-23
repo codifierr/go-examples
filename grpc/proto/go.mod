@@ -1,4 +1,4 @@
-module github.com/codifierr/go-examples/grpc/proto/v0
+module github.com/codifierr/go-examples/grpc/proto/v0.0.1
 
 go 1.17
 

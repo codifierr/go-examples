@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"time"
 
-	pb "github.com/codifierr/go-examples/grpc/proto"
+	pb "proto"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -45,6 +45,7 @@ func main() {
 
 	s := grpc.NewServer()
 	pb.RegisterMessageProcessorServer(s, &server{})
+
 	log.Info().Str("Address", lis.Addr().String()).Msg("grpc server started!")
 	if err := s.Serve(lis); err != nil {
 		log.Fatal().Err(err).Msg("Failed to serve")
