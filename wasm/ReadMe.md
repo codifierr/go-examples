@@ -9,7 +9,7 @@ export go path : export PATH="$PATH:$(go env GOPATH)/bin"
 
 goexec 'http.ListenAndServe(`:8080`, http.FileServer(http.Dir(`.`)))'
 
-Then go to 
+#Go to 
 http://localhost:8080/httpclient/ for http call example
 
 http://localhost:8080/prettyjson/ for pretty printing json
