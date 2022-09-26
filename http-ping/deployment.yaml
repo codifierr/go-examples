@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-ping
+  labels:
+    app: http-ping
+    service: http-ping
+spec:
+  ports:
+  - name: http-http-ping
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: http-ping
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-ping
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: http-ping
+      version: v0.0.1
+  template:
+    metadata:
+      labels:
+        app: http-ping
+        version: v0.0.1
+    spec:
+      containers:
+      - image: ssingh3339/http-ping:latest
+        imagePullPolicy: IfNotPresent
+        name: http-ping
+        ports:
+        - containerPort: 8080
+        resources: 
+            limits: 
+              cpu: ".5"
+              memory: 100Mi
+            requests: 
+              cpu: ".25"
+              memory: 50Mi
