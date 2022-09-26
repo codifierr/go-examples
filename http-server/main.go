@@ -9,26 +9,17 @@ import (
 )
 
 func helloHandler(rw http.ResponseWriter, r *http.Request) {
-
-	for name, values := range r.Header {
-		// Loop over all values for the name.
-		for _, value := range values {
-			fmt.Println(name, value)
-		}
-	}
-
 	fmt.Fprint(rw, "Hello gofers.")
-
 }
 
-//MathRequest func request
+// MathRequest func request
 type MathRequest struct {
 	Op    string  `json:"op"`
 	Left  float64 `json:"left"`
 	Right float64 `json:"right"`
 }
 
-//MathResponse func response
+// MathResponse func response
 type MathResponse struct {
 	Error  string  `json:"error"`
 	Result float64 `json:"result"`
@@ -80,11 +71,6 @@ func mathHandler(rw http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/hello", helloHandler)
 	http.HandleFunc("/math", mathHandler)
-	// go func() {
-	// 	if err := http.ListenAndServe(":8190", nil); err != nil {
-	// 		log.Fatal(err)
-	// 	}
-	// }()
 	if err := http.ListenAndServe(":8390", nil); err != nil {
 		log.Fatal(err)
 	}
