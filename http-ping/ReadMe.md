@@ -1,12 +1,11 @@
 Benchmark Test is as below On mac M1
-Test Utility : https://github.com/grafana/k6
-
+Test Utility : <https://github.com/grafana/k6> 
 
           /\      |‾‾| /‾‾/   /‾‾/
      /\  /  \     |  |/  /   /  /
     /  \/    \    |     (   /   ‾‾\
    /          \   |  |\  \ |  (‾)  |
-  / __________ \  |__| \__\ \_____/ .io
+  / __________\  |__| \__\ \_____/ .io
 
   execution: local
      script: get-http-ping-local.js
@@ -14,7 +13,6 @@ Test Utility : https://github.com/grafana/k6
 
   scenarios: (100.00%) 1 scenario, 80 max VUs, 1m0s max duration (incl. graceful stop):
            * default: 80 looping VUs for 30s (gracefulStop: 30s)
-
 
 running (0m30.0s), 00/80 VUs, 1721532 complete and 0 interrupted iterations
 default ✓ [======================================] 80 VUs  30s
