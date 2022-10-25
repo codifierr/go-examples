@@ -29,6 +29,7 @@ func main() {
 		"https://learning.oreilly.com",
 		"https://stackoverflow.com",
 		"https://golang.org",
+		"https://httpbin.org/get",
 	}
 	ch := make(chan string)
 	for _, url := range urls {

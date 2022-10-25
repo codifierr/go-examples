@@ -6,6 +6,7 @@ metadata:
     app: http-ping
     service: http-ping
 spec:
+  type: NodePort
   ports:
   - name: http-http-ping
     port: 8080
