@@ -1,0 +1,22 @@
+syntax = "proto3";
+package proto;
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/codifierr/go-examples/grpc-ping/proto";
+
+message Ping{
+    string id=1;
+    string message=2;
+    google.protobuf.Timestamp time =3;
+}
+
+message Pong{
+    string id = 1;
+    string trace_id = 2;
+    string message = 3;
+    google.protobuf.Timestamp time =4;
+}
+
+service PingProcessor {
+    rpc ProcessPing (Ping) returns (Pong);
+}
