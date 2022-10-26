@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ws-echo
+  labels:
+    app: ws-echo
+    service: ws-echo
+spec:
+  type: NodePort
+  ports:
+  - name: http-ws-echo
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: ws-echo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ws-echo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ws-echo
+      version: v0.0.1
+  template:
+    metadata:
+      labels:
+        app: ws-echo
+        version: v0.0.1
+    spec:
+      containers:
+      - image: ssingh3339/ws-echo:latest
+        imagePullPolicy: IfNotPresent
+        name: ws-echo
+        ports:
+        - containerPort: 8080
+        resources: 
+            limits: 
+              cpu: ".5"
+              memory: 100Mi
+            requests: 
+              cpu: ".25"
+              memory: 50Mi
