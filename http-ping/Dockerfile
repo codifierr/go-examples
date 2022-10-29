@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 alpine
+FROM alpine
 
 RUN mkdir /gobin/
 
