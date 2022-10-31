@@ -35,7 +35,6 @@ func mathHandler(rw http.ResponseWriter, r *http.Request) {
 	if err := dec.Decode(req); err != nil {
 		http.Error(rw, err.Error(), http.StatusBadRequest)
 	}
-	log.Printf("Math Request : %+v", req)
 	// Do math
 	resp := MathResponse{}
 	switch req.Op {
