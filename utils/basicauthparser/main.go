@@ -17,7 +17,7 @@ func main() {
 }
 
 func helloHandler(rw http.ResponseWriter, r *http.Request) {
-	username, pass, ok := parseUserAuthorizationHeader(r)
+	_, _, ok := parseUserAuthorizationHeader(r)
 	if ok {
 		fmt.Println("Credentials Present!")
 	}
