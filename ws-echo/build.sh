@@ -47,3 +47,9 @@ else
   echo "Error: Compilation Failed."
   exit $status
 fi
+
+# docker build
+docker build . -t ssingh3339/ws-echo
+
+# docker push
+docker push ssingh3339/ws-echo
