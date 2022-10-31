@@ -19,8 +19,7 @@ func main() {
 func helloHandler(rw http.ResponseWriter, r *http.Request) {
 	username, pass, ok := parseUserAuthorizationHeader(r)
 	if ok {
-		fmt.Println("username", username)
-		fmt.Println("pass", pass)
+		fmt.Println("Credentials Present!")
 	}
 	fmt.Fprint(rw, "Hello gofers.")
 
