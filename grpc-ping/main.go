@@ -13,6 +13,12 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+)
+
+var (
+	crtFilePath = "./cert/server.cert"
+	keyFilePath = "./cert/server.key"
 )
 
 // grpc server
@@ -47,7 +53,12 @@ func main() {
 		log.Fatal().Err(err).Msg("Failed to listen")
 	}
 
-	s := grpc.NewServer()
+	c, err := credentials.NewServerTLSFromFile(crtFilePath, keyFilePath)
+	if err != nil {
+		log.Fatal().Err(err).Msg("Credentials from tls file")
+	}
+
+	s := grpc.NewServer(grpc.Creds(c))
 	pb.RegisterPingProcessorServer(s, &server{})
 
 	log.Info().Str("Address", lis.Addr().String()).Msg("grpc server started!")
