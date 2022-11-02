@@ -26,13 +26,15 @@ spec:
       version: v0.0.1
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: ws-echo
         version: v0.0.1
     spec:
       containers:
       - image: ssingh3339/ws-echo:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: ws-echo
         ports:
         - containerPort: 8080
