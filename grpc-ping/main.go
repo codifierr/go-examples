@@ -36,6 +36,7 @@ func main() {
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
 
 	log.Info().Msg("Initializing grpc echo server!")
+	tls := os.Getenv("TLS")
 
 	ctx, cancel := context.WithCancel(context.Background())
 
@@ -58,7 +59,16 @@ func main() {
 		log.Fatal().Err(err).Msg("Credentials from tls file")
 	}
 
-	s := grpc.NewServer(grpc.Creds(c))
+	var s *grpc.Server
+
+	if tls != "" && tls == "true" {
+		s = grpc.NewServer(grpc.Creds(c))
+		log.Info().Str("tls", tls).Msg("TLS Enabled")
+	} else {
+		log.Info().Str("tls", tls).Msg("TLS not Enabled")
+		s = grpc.NewServer()
+	}
+
 	pb.RegisterPingProcessorServer(s, &server{})
 
 	log.Info().Str("Address", lis.Addr().String()).Msg("grpc server started!")

@@ -38,6 +38,9 @@ spec:
         name: grpc-ping
         ports:
         - containerPort: 8080
+        env:
+        - name: TLS
+          value: "false"
         resources: 
             limits: 
               cpu: ".5"
