@@ -14,6 +14,7 @@ import (
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/reflection"
 )
 
 var (
@@ -70,6 +71,7 @@ func main() {
 	}
 
 	pb.RegisterPingProcessorServer(s, &server{})
+	reflection.Register(s)
 
 	log.Info().Str("Address", lis.Addr().String()).Msg("grpc server started!")
 	if err := s.Serve(lis); err != nil {
