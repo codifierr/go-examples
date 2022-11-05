@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	conn, err := memphis.Connect("broker.sandbox.memphis.dev", "ssingh", "XrHmszw6rgm8IyOPNNTy")
+	conn, err := memphis.Connect("", "", "")
 	if err != nil {
 		os.Exit(1)
 	}
