@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: udp-server
+  labels:
+    app: udp-server
+    service: udp-server
+spec:
+  type: NodePort
+  ports:
+    - name: http-udp-server
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: udp-server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udp-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: udp-server
+      version: v0.0.1
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: udp-server
+        version: v0.0.1
+    spec:
+      containers:
+        - image: ssingh3339/udp-server:latest
+          imagePullPolicy: Always
+          name: udp-server
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: ".5"
+              memory: 100Mi
+            requests:
+              cpu: ".25"
+              memory: 50Mi
