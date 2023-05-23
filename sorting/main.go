@@ -26,7 +26,7 @@ func bigSorting(unsorted []string) []string {
 	return result
 }
 
-//ByIntValue custom type
+// ByIntValue custom type
 type ByIntValue []string
 
 func (a ByIntValue) Len() int {

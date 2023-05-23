@@ -21,7 +21,7 @@ WORKDIR /app
 COPY --from=builder /app/udp-server .
 
 # Expose the UDP port
-EXPOSE 9098/udp
+EXPOSE 8080/udp
 
 # Run the UDP server
 CMD ["./udp-server"]

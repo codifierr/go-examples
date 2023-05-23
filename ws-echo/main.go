@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/google/uuid"
@@ -46,7 +47,7 @@ func echo(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func echostream(w http.ResponseWriter, r *http.Request) {
+func echoStream(w http.ResponseWriter, r *http.Request) {
 	c, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Error().AnErr("Error", err).Msg("Upgrade websocket")
@@ -69,7 +70,7 @@ func echostream(w http.ResponseWriter, r *http.Request) {
 			log.Error().AnErr("Error", err).Msg("Invalid message")
 		}
 
-		log.Info().Interface("Stream Message", streamMessage).Msg("Stream Message")
+		log.Info().Interface("stream message", streamMessage).Msg("Stream Message")
 
 		data := streamMessage.Message
 		count := streamMessage.ReplyCount
@@ -102,11 +103,11 @@ func echostream(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
+	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 
 	log.Info().Msg("Initialized websocket echo server!")
 	http.HandleFunc("/echo", echo)
-	http.HandleFunc("/echostream", echostream)
+	http.HandleFunc("/echostream", echoStream)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal().AnErr("Error", err).Msg("Failed to Start Server")
 	}

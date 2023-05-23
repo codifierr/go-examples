@@ -2,3 +2,4 @@
 .vscode/settings.json
 grpc/.vscode/settings.json
 wasm/.vscode/settings.json
+rsocket/.testCoverage.txt

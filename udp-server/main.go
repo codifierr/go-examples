@@ -20,7 +20,7 @@ func main() {
 	}
 	defer udpServer.Close()
 
-	buf := make([]byte, 1024) // buffer for reading packets
+	buf := make([]byte, 32768) // buffer for reading packets
 	for {
 		n, addr, err := udpServer.ReadFrom(buf)
 		if err != nil {

@@ -1,0 +1,21 @@
+query Query {
+  countries {
+    code
+    name
+    native
+    phone
+    currency
+    languages {
+      code
+      name
+      native
+      rtl
+    }
+    emoji
+    emojiU
+    states {
+      code
+      name
+    }
+  }
+}

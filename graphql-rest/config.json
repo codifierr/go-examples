@@ -1,0 +1,57 @@
+{
+    "endpoints": [
+        {
+            "endpoint": "/graph2r/countries",
+            "method": "GET",
+            "inputHeaders": [
+                "Cookie",
+                "Content-Type"
+            ],
+            "backend": [
+                {
+                    "urlPattern": "/graphql",
+                    "method": "POST",
+                    "graphql": {
+                        "type": "query",
+                        "operationName": "country",
+                        "queryPath": "queries/countries.graphql"
+                    },
+                    "host": [
+                        "https://countries.trevorblades.com"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/graph2r/countries/{countryCode}",
+            "method": "GET",
+            "inputPathParams": {
+                "countryCode": "string"
+            },
+            "inputRequestParams":{
+            "countryCode": "string"
+            },
+            "inputHeaders": [
+                "Cookie",
+                "Content-Type"
+            ],
+            "backend": [
+                {
+                    "urlPattern": "/graphql",
+                    "method": "POST",
+                    "graphql": {
+                        "type": "query",
+                        "operationName": "country",
+                        "variables": {
+                            "countryCode": "{countryCode}"
+                        },
+                        "queryPath": "queries/country.graphql"
+                    },
+                    "host": [
+                        "https://countries.trevorblades.com"
+                    ]
+                }
+            ]
+        }
+    ]
+}

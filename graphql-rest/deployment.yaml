@@ -1,47 +1,47 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: udp-server
+  name: graphql-rest
   labels:
-    app: udp-server
-    service: udp-server
+    app: graphql-rest
+    service: graphql-rest
 spec:
   type: NodePort
   ports:
-    - name: udp-udp-server
-      port: 8080
-      targetPort: 8080
+  - name: http-graphql-rest
+    port: 8080
+    targetPort: 8080
   selector:
-    app: udp-server
+    app: graphql-rest
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: udp-server
+  name: graphql-rest
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: udp-server
+      app: graphql-rest
       version: v0.0.1
   template:
     metadata:
       annotations:
         linkerd.io/inject: enabled
       labels:
-        app: udp-server
+        app: graphql-rest
         version: v0.0.1
     spec:
       containers:
-        - image: ssingh3339/udp-server:latest
-          imagePullPolicy: Always
-          name: udp-server
-          ports:
-            - containerPort: 8080
-          resources:
-            limits:
+      - image: ssingh3339/graphql-rest:latest
+        imagePullPolicy: Always
+        name: graphql-rest
+        ports:
+        - containerPort: 8080
+        resources: 
+            limits: 
               cpu: ".5"
               memory: 100Mi
-            requests:
+            requests: 
               cpu: ".25"
               memory: 50Mi
