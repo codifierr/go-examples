@@ -1,11 +1,17 @@
-FROM alpine
+FROM --platform=${BUILDPLATFORM:-linux/amd64} golang:1.20.4 AS builder
 
-RUN mkdir /gobin/
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+ARG TARGETOS
+ARG TARGETARCH
 
-COPY image/rsocketping /gobin
+WORKDIR /app/
+ADD . .
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -ldflags="-w -s" -o rsocketping main.go
 
-WORKDIR /gobin
-
-ENTRYPOINT ["/gobin/rsocketping"]
+FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine
+WORKDIR /app/
+COPY --from=builder /app/rsocketping /app/rsocketping
+ENTRYPOINT ["/app/rsocketping"]
 
 EXPOSE 8080
