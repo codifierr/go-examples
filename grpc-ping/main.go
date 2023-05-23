@@ -7,7 +7,7 @@ import (
 	"os"
 	"os/signal"
 
-	pb "proto"
+	pb "github.com/codifierr/go-examples/grpc-ping/proto"
 
 	"github.com/google/uuid"
 	"github.com/rs/zerolog"

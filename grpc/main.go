@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"time"
 
-	pb "proto"
+	pb "github.com/codifierr/go-examples/grpc/proto"
 
 	"github.com/google/uuid"
 	"github.com/rs/zerolog"
