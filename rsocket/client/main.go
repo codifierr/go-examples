@@ -13,7 +13,7 @@ func main() {
 	// Connect to server
 	cli, err := rsocket.Connect().
 		SetupPayload(payload.NewString("Hello", "World")).
-		Transport(rsocket.WebsocketClient().SetURL("ws://127.0.0.1:7878").Build()).
+		Transport(rsocket.WebsocketClient().SetURL("ws://127.0.0.1:31539").Build()).
 		Start(context.Background())
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to connect")
