@@ -1,27 +1,17 @@
-# Use the official Go 1.19 base image
-FROM golang:1.19 as builder
+FROM --platform=${BUILDPLATFORM:-linux/amd64} golang:1.20.4 AS builder
 
-# Set the working directory
-WORKDIR /app
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+ARG TARGETOS
+ARG TARGETARCH
 
-# Copy the Go source code into the container
-COPY go.mod go.sum ./
-COPY main.go .
+WORKDIR /app/
+ADD . .
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -ldflags="-w -s" -o udp-server  main.go
 
-# Build the Go binary
-RUN go build -o udp-server main.go
+FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine
+WORKDIR /app/
+COPY --from=builder /app/udp-server  /app/udp-server 
+ENTRYPOINT ["/app/udp-server"]
 
-# Use a lightweight base image for the final container
-FROM debian:buster-slim
-
-# Set the working directory
-WORKDIR /app
-
-# Copy the built binary from the builder stage
-COPY --from=builder /app/udp-server .
-
-# Expose the UDP port
 EXPOSE 8080/udp
-
-# Run the UDP server
-CMD ["./udp-server"]

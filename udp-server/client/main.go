@@ -24,7 +24,7 @@ func main() {
 	// Destination address for UDP connection
 	destAddr := &net.UDPAddr{
 		IP:   net.ParseIP("127.0.0.1"), // Replace with the IP address of the target UDP server
-		Port: 64517,                    // Replace with the port number of the target UDP server
+		Port: 30175,                    // Replace with the port number of the target UDP server
 	}
 
 	// Open a UDP connection

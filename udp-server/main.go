@@ -11,6 +11,7 @@ import (
 func main() {
 	// Configure logging with zerolog
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 	log.Info().Msg("Starting UDP server...")
 
 	// listen to incoming udp packets
