@@ -15,7 +15,7 @@ require (
 	github.com/rs/zerolog v1.29.1
 	github.com/streadway/amqp v1.0.0
 	github.com/vektah/gqlparser/v2 v2.5.1
-	google.golang.org/grpc v1.55.0
+	google.golang.org/grpc v1.56.1
 	google.golang.org/protobuf v1.30.0
 	gopkg.in/olivere/elastic.v5 v5.0.86
 )
