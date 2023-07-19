@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: graphql-stream
+  labels:
+    app: graphql-stream
+    service: graphql-stream
+spec:
+  type: NodePort
+  ports:
+  - name: ws-graphql-stream
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: graphql-stream
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphql-stream
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graphql-stream
+      version: v0.0.1
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: graphql-stream
+        version: v0.0.1
+    spec:
+      containers:
+      - image: ssingh3339/graphql-stream:latest
+        imagePullPolicy: Always
+        name: graphql-stream
+        ports:
+        - containerPort: 8080
+        resources: 
+            limits: 
+              cpu: ".5"
+              memory: 100Mi
+            requests: 
+              cpu: ".25"
+              memory: 50Mi
