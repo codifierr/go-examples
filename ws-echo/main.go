@@ -12,7 +12,12 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-var upgrader = websocket.Upgrader{}
+var upgrader = websocket.Upgrader{
+	CheckOrigin: func(r *http.Request) bool {
+		// Allow all origins for demonstration purposes.
+		return true
+	},
+}
 
 type StreamMessage struct {
 	Message    string `json:"message"`
