@@ -76,8 +76,26 @@ publish-graphql-stream:
 		--tag $(IMAGE-PREFIX)/graphql-stream:latest \
 		graphql-stream/.
 
+.PHONY: build-http-ping
+build-http-ping:
+	@docker buildx create --use --name=crossplat --node=crossplat && \
+	docker buildx build \
+		--platform linux/amd64,linux/arm64 \
+		--output "type=docker,push=false" \
+		--tag $(IMAGE-PREFIX)/http-ping:latest \
+		http-ping/.
+
+.PHONY: publish-http-ping
+publish-http-ping:
+	@docker buildx create --use --name=crossplat --node=crossplat && \
+	docker buildx build \
+		--platform linux/amd64,linux/arm64 \
+		--output "type=image,push=true" \
+		--tag $(IMAGE-PREFIX)/http-ping:latest \
+		http-ping/.
+
 .PHONY: buildall
-buildall: build-rsocket-ping build-udp-server build-echo-graphql build-graphql-stream
+buildall: build-rsocket-ping build-udp-server build-echo-graphql build-graphql-stream build-http-ping
 
 .PHONY: publishall
-publishall: publish-rsocket-ping publish-udp-server publish-echo-graphql publish-graphql-stream
+publishall: publish-rsocket-ping publish-udp-server publish-echo-graphql publish-graphql-stream publish-http-ping

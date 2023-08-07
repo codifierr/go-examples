@@ -1,11 +1,17 @@
-FROM alpine
+FROM --platform=${BUILDPLATFORM:-linux/amd64} golang:1.20.4 AS builder
 
-RUN mkdir /gobin/
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+ARG TARGETOS
+ARG TARGETARCH
 
-COPY image/httpping /gobin
+WORKDIR /app/
+ADD . .
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -ldflags="-w -s" -o http-ping  main.go
 
-WORKDIR /gobin
+FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine
+WORKDIR /app/
+COPY --from=builder /app/http-ping  /app/http-ping 
+ENTRYPOINT ["/app/http-ping"]
 
-ENTRYPOINT ["/gobin/httpping"]
-
-EXPOSE 8080
+EXPOSE 8080/tcp

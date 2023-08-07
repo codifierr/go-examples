@@ -45,3 +45,10 @@ spec:
             requests:
               cpu: ".25"
               memory: 50Mi
+          env:
+            - name: NEWRELIC_API_KEY
+              value: ""
+            - name: NEWRELIC_ENABLED
+              value: "false"
+            - name: LOG_LEVEL
+              value: "info"

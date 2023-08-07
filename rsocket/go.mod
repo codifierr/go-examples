@@ -3,7 +3,7 @@ module rsocket
 go 1.20
 
 require (
-	github.com/rs/zerolog v1.29.1
+	github.com/rs/zerolog v1.30.0
 	github.com/rsocket/rsocket-go v0.8.12
 )
 
@@ -16,5 +16,5 @@ require (
 	github.com/panjf2000/ants/v2 v2.8.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
-	golang.org/x/sys v0.10.0 // indirect
+	golang.org/x/sys v0.11.0 // indirect
 )
