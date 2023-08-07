@@ -47,6 +47,7 @@ func main() {
 		newrelic.ConfigLicense(newRelicKey),
 		newrelic.ConfigDebugLogger(os.Stdout),
 		newrelic.ConfigEnabled(newRelicEnabled),
+		newrelic.ConfigDistributedTracerEnabled(true),
 	)
 
 	router.Use(nrgin.Middleware(nr))
