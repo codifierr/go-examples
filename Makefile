@@ -94,8 +94,26 @@ publish-http-ping:
 		--tag $(IMAGE-PREFIX)/http-ping:latest \
 		http-ping/.
 
+.PHONY: build-grpc-ping
+build-grpc-ping:
+	@docker buildx create --use --name=crossplat --node=crossplat && \
+	docker buildx build \
+		--platform linux/amd64,linux/arm64 \
+		--output "type=docker,push=false" \
+		--tag $(IMAGE-PREFIX)/grpc-ping:latest \
+		grpc-ping/.
+
+.PHONY: publish-grpc-ping
+publish-grpc-ping:
+	@docker buildx create --use --name=crossplat --node=crossplat && \
+	docker buildx build \
+		--platform linux/amd64,linux/arm64 \
+		--output "type=image,push=true" \
+		--tag $(IMAGE-PREFIX)/grpc-ping:latest \
+		grpc-ping/.
+
 .PHONY: buildall
-buildall: build-rsocket-ping build-udp-server build-echo-graphql build-graphql-stream build-http-ping
+buildall: build-rsocket-ping build-udp-server build-echo-graphql build-graphql-stream build-http-ping build-grpc-ping
 
 .PHONY: publishall
-publishall: publish-rsocket-ping publish-udp-server publish-echo-graphql publish-graphql-stream publish-http-ping
+publishall: publish-rsocket-ping publish-udp-server publish-echo-graphql publish-graphql-stream publish-http-ping publish-grpc-ping
