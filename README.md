@@ -53,11 +53,6 @@ To get started with the examples in this repository, follow these steps:
 
 4. **Explore and Learn**: Feel free to modify the code, experiment with different variations, and learn from the examples. Don't hesitate to check out the official Go documentation (<https://golang.org/doc/>) for more information on the language's features and capabilities.
 
-5. **Clone the Repository**: Clone this repository to your local machine using the following command:
-
-   ```bash
-   git clone https://github.com/codifierr/go-examples.git
-
 ## Contributing
 
 Contributions to this repository are more than welcome! If you have a new example, improvement to an existing example, or any insightful feedback, please follow these steps:
