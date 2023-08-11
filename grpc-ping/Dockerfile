@@ -1,15 +1,21 @@
-FROM alpine
+FROM --platform=${BUILDPLATFORM:-linux/amd64} golang:latest AS builder
 
-RUN mkdir /gobin/
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+ARG TARGETOS
+ARG TARGETARCH
 
-COPY cert/server.cert /gobin/cert/server.cert
+WORKDIR /app/
+ADD . .
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -ldflags="-w -s" -o grpc-ping  main.go
 
-COPY cert/server.key /gobin/cert/server.key
+FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine
+WORKDIR /app/
 
-COPY image/grpcping /gobin
+COPY --from=builder /app/cert/server.cert /app/cert/server.cert
+COPY --from=builder /app/cert/server.key /app/cert/server.key
 
-WORKDIR /gobin
+COPY --from=builder /app/grpc-ping  /app/grpc-ping 
+ENTRYPOINT ["/app/grpc-ping"]
 
-ENTRYPOINT ["/gobin/grpcping"]
-
-EXPOSE 8080
+EXPOSE 8080/tcp
