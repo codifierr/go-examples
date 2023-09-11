@@ -14,7 +14,7 @@ require (
 	github.com/prometheus/client_golang v1.16.0
 	github.com/rs/zerolog v1.30.0
 	github.com/streadway/amqp v1.1.0
-	github.com/vektah/gqlparser/v2 v2.5.8
+	github.com/vektah/gqlparser/v2 v2.5.9
 	google.golang.org/grpc v1.57.0
 	google.golang.org/protobuf v1.31.0
 	gopkg.in/olivere/elastic.v5 v5.0.86
