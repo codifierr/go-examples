@@ -11,7 +11,7 @@ require (
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/machinebox/graphql v0.2.2
 	github.com/pkg/errors v0.9.1
-	github.com/prometheus/client_golang v1.16.0
+	github.com/prometheus/client_golang v1.17.0
 	github.com/rs/zerolog v1.30.0
 	github.com/streadway/amqp v1.1.0
 	github.com/vektah/gqlparser/v2 v2.5.8
@@ -30,7 +30,7 @@ require (
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.4 // indirect
-	github.com/prometheus/client_model v0.4.0 // indirect
+	github.com/prometheus/client_model v0.4.1-0.20230718164431-9a2bf3000d16 // indirect
 	github.com/prometheus/common v0.44.0 // indirect
 	github.com/prometheus/procfs v0.11.1 // indirect
 	github.com/stretchr/testify v1.8.1 // indirect
