@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"math/cmplx"
 )
 
@@ -11,8 +11,14 @@ var (
 	z             = cmplx.Sqrt(-5 + 12i)
 )
 
+// main is the entry point of the program.
 func main() {
-	fmt.Printf("Type: %T Value: %v\n", toBe, toBe)
-	fmt.Printf("Type: %T Value: %v\n", maxInt, maxInt)
-	fmt.Printf("Type: %T Value: %v\n", z, z)
+	printVariable("toBe", toBe)
+	printVariable("maxInt", maxInt)
+	printVariable("z", z)
+}
+
+// printVariable prints the type and value of a variable.
+func printVariable(name string, value interface{}) {
+	log.Printf("Variable %s is %v\n", name, value)
 }
