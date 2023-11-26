@@ -11,7 +11,7 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -ldflags="-w -s
 
 FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine
 WORKDIR /app/
-COPY --from=builder /app/udp-server  /app/udp-server 
+COPY --from=builder /app/udp-server  /app/udp-server
 ENTRYPOINT ["/app/udp-server"]
 
 EXPOSE 8080/udp

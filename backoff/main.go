@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/jpillora/backoff"
+	"github.com/rs/zerolog/log"
 )
 
 // main is the entry point of the program.
@@ -55,13 +56,18 @@ func main() {
 		resetBackoff(b)
 
 		// Write data to the connection.
-		conn.Write([]byte("hello world!"))
+		_, err = conn.Write([]byte("hello world!"))
+		if err != nil {
+			log.Error().AnErr("Error", err).Msg("Error in writing data")
+		}
 
 		// ... Read ... Write ... etc
 
 		// Close the connection.
-		conn.Close()
-
+		err = conn.Close()
+		if err != nil {
+			log.Error().AnErr("Error", err).Msg("Error in closing connection")
+		}
 		// Continue to attempt to connect.
 	}
 }

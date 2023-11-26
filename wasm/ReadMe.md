@@ -3,9 +3,9 @@
 ### Follow this document to compile and run in browser
 <https://github.com/golang/go/wiki/WebAssembly#getting-started>
 
-### Run pre-compiled files 
-Install goexec and run the server: 
-```shell 
+### Run pre-compiled files
+Install goexec and run the server:
+```shell
 go get -u github.com/shurcooL/goexec
 
 export go path : export PATH="$PATH:$(go env GOPATH)/bin"
