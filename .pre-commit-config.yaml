@@ -1,0 +1,33 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+default_stages: [commit]
+default_language_version:
+  python: python3
+minimum_pre_commit_version: "2.10.1"
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-executables-have-shebangs
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-xml
+      - id: check-json
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
+  - repo: local
+    hooks:
+      - id: shellcheck
+        name: Check Shell scripts syntax correctness
+        language: system
+        entry: shellcheck -x
+        types: [shell]
+
+      - id: lint-dockerfile
+        name: Lint dockerfile
+        language: system
+        entry: hadolint
+        types: [dockerfile]

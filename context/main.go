@@ -15,7 +15,11 @@ func main() {
 	ctx1, cancel1 := context.WithTimeout(ctxb, 5*time.Second)
 	defer cancel1()
 	deadline, okd := ctx1.Deadline()
-	getTimeOutFromContext(ctx1)
+	time, err := getTimeOutFromContext(ctx1)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(time)
 	fmt.Println(deadline)
 	fmt.Println(okd)
 	// go func() {

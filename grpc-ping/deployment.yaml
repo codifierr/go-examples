@@ -41,10 +41,10 @@ spec:
         env:
         - name: TLS
           value: "false"
-        resources: 
-            limits: 
+        resources:
+            limits:
               cpu: ".5"
               memory: 100Mi
-            requests: 
+            requests:
               cpu: ".25"
               memory: 50Mi
