@@ -12,7 +12,7 @@ require (
 	github.com/machinebox/graphql v0.2.2
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.18.0
-	github.com/rs/zerolog v1.31.0
+	github.com/rs/zerolog v1.32.0
 	github.com/streadway/amqp v1.1.0
 	github.com/vektah/gqlparser/v2 v2.5.10
 	google.golang.org/grpc v1.60.1
